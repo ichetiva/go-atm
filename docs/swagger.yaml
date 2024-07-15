@@ -1,0 +1,123 @@
+basePath: /
+definitions:
+  responder.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      ok:
+        type: boolean
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  title: ATM API
+  version: "1.0"
+paths:
+  /accounts:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: CreateAccount
+      tags:
+      - account
+  /accounts/{id}/balance:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: a202482a-bf68-4e17-a4c4-5a268b2e15d6
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Get account balance
+      tags:
+      - account
+  /accounts/{id}/deposit:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: a202482a-bf68-4e17-a4c4-5a268b2e15d6
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Deposit amount
+        in: body
+        name: amount
+        required: true
+        schema:
+          type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Deposit cash to account
+      tags:
+      - account
+  /accounts/{id}/withdraw:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: a202482a-bf68-4e17-a4c4-5a268b2e15d6
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Withdraw amount
+        in: body
+        name: amount
+        required: true
+        schema:
+          type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/responder.Response'
+        "500":
+          description: Internal error
+          schema:
+            $ref: '#/definitions/responder.Response'
+      summary: Withdraw cash from account
+      tags:
+      - account
+swagger: "2.0"
